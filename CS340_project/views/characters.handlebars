@@ -1,0 +1,73 @@
+<style>
+    input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+}
+button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+
+
+<h1>Star Wars Characters</h1>
+<div>
+<table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
+    <thead>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birth Date</th>
+        <th>Gender</th>
+        <th>Species</th>
+        <th>Height</th>
+    </thead>
+    <tbody>
+        {{#each characters}}
+        <tr>
+            <td>{{first_name}}</td>
+            <td>{{last_name}}</td>
+            <td>{{birth_date}}</td>
+            <td>{{gender}}</td>
+            <td>{{species}}</td>
+            <td>{{height}}</td>
+            <td><button onclick="deleteCharacter({{character_id}})">Delete</button></td>
+            <td><a href="/characters/{{character_id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addCharacter" action="/characters" method="POST">
+    First Name: <input type="text" name="first_name"><br>
+    Last Name: <input type="text" name="last_name"><br>
+    Birth Date: <input type="text" name="birth_date"><br>
+    Gender: <input type="text" name="gender"><br>
+    Species: <input type="text" name="species"><br>
+    Height: <input type="text" name="height"><br>
+    <input type="submit" value="Submit">
+    </form>
+</table>
+</div>
