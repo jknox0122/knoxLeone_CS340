@@ -3,26 +3,26 @@ module.exports = function(){
     var router = express.Router();
     var app = express();
 
-    function getCharacters(res,mysql,context,complete){
-        mysql.pool.query('SELECT character_id, first_name, last_name, birth_date, gender, species, height FROM characters', function(error,results,fields){
+    function getFilms(res,mysql,context,complete){
+        mysql.pool.query('SELECT film_id, name_of_movie, year_released, imdb_rating, directed_by FROM films', function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.characters = results;
+            context.films = results;
             complete();
         });
     }
 
-    function getCharacter(res,mysql,context,character_id, complete){
-        var sql = "SELECT character_id, first_name, last_name, birth_date, gender, species, height FROM characters WHERE character_id = ?";
-        var inserts = [character_id];
+    function getFilm(res,mysql,context,character_id, complete){
+        var sql = "SELECT film_id, name_of_movie, year_released, imdb_rating, directed_by FROM films WHERE film_id = ?";
+        var inserts = [film_id];
         mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.character = results[0];
+            context.film = results[0];
             complete();
         });
     }
@@ -32,54 +32,47 @@ module.exports = function(){
         var context ={};
         context.jsscripts = ["deleteCharacter.js"];
         var mysql = req.app.get('mysql');
-        getCharacters(res,mysql,context,complete);
+        getFilms(res,mysql,context,complete);
         function complete(){
             callbackCount++;
             if(callbackCount >=1){
-                res.render('characters',context);
+                res.render('films',context);
             }
         }
     });
 
-    router.get('/specificSearch', function(req,res){
-        var context = {};
-        context.jsscripts = ["specificSearch.js"];
-        res.render('specificSearch',context);
-    } )
-
-
-    router.get('/:character_id/', function(req,res){
+    router.get('/:film_id/', function(req,res){
         callbackCount = 0;
         var context = {};
         context.jsscripts = ["updateCharacter.js"];
         var mysql = req.app.get('mysql');
-        getCharacter(res,mysql,context,req.params.character_id,complete);
+        getFilm(res,mysql,context,req.params.film_id,complete);
         function complete(){
             callbackCount++;
             if(callbackCount >=1){
-                res.render('updateCharacter',context);
+                res.render('updateFilm',context);
             }
         }
     });
 
     router.post('/',function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO characters ( first_name, last_name, birth_date, gender, species, height) VALUES (?,?,?,?,?,?)";
-        var inserts = [req.body.first_name, req.body.last_name, req.body.birth_date, req.body.gender, req.body.species, req.body.height];
+        var sql = "INSERT INTO films (name_of_movie, year_released, imdb_rating, directed_by) VALUES (?,?,?,?)";
+        var inserts = [req.body.name_of_movie, req.body.year_released, req.body.imdb_rating, req.body.directed_by];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             } else{
-                res.redirect('/characters');
+                res.redirect('/films');
             }
         });
     });
 
-    router.put('/:character_id', function(req,res){
+    router.put('/:film_id', function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE characters SET first_name=?, last_name=?, birth_date=?, gender=?, species=?, height=? WHERE character_id =?";
-        var inserts = [req.body.first_name, req.body.last_name, req.body.birth_date, req.body.gender, req.body.species, req.body.height, req.params.character_id];
+        var sql = "UPDATE films SET name_of_movie=?, year_released=?, imdb_rating=?, directed_by=? WHERE film_id =?";
+        var inserts = [req.body.name_of_movie, req.body.year_released, req.body.imdb_rating, req.body.directed_by, req.params.film_id];
         sql = mysql.pool.query(sql,inserts,function(error, results,fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -91,10 +84,10 @@ module.exports = function(){
         });
     });
 
-    router.delete('/:character_id',function(req,res){
+    router.delete('/:film_id',function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM characters WHERE character_id = ?";
-        var inserts = [req.params.character_id];
+        var sql = "DELETE FROM films WHERE film_id = ?";
+        var inserts = [req.params.film_id];
         sql = mysql.pool.query(sql,inserts,function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));

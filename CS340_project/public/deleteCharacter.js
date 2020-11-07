@@ -8,3 +8,13 @@ function deleteCharacter(character_id){
         }
     })
 };
+
+function deleteFilm(film_id){
+    $.ajax({
+        url: '/films/' + film_id,
+        type: 'DELETE',
+        success: function(result){
+            location.reload();
+        }
+    })
+};

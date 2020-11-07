@@ -1,16 +1,55 @@
-<head>
-    <style>
-        table{table-layout: fixed; width:600px;}
-        table td{border:solid 1px; width:100px; word-wrap:break-word;}
-    </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<style>
+    input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+}
+button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+  border-collapse: collapse;
+}
+th{
+    background-color: darkgray;
+}
+tr{
+    background-color: lightgray;
+}
+
+</style>
+
     <h1><strong>STAR WARS DATABASE HOMEPAGE</strong></h1>
     
-    <table border="1">
+    <table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
         <thead>
         <tr>
             <th>Link To Page</th>
@@ -21,8 +60,8 @@
     <tbody>
         <tr>
             <td>
-                <a href="./characters.html">
-                <img src="./chewey.webp" style="width:192px;height:96px;">
+                <a href='/characters'>
+                <img src="/images/chewey.webp" style="width:192px;height:96px;">
                 </a>
             </td>
             <td>Characters</td>
@@ -30,8 +69,8 @@
         </tr>
         <tr>
             <td>
-                <a href="./films.html">
-                <img src="./movie.jpg" style="width:192px;height:283px;">
+                <a href='/films'>
+                <img src="/images/movie.jpg" style="width:192px;height:283px;">
                 </a>
             </td>
             <td>Films</td>
@@ -40,7 +79,7 @@
         <tr>
             <td>
                 <a href="./homeworlds.html">
-                    <img src="Tatooine.jpg" style="width:192px;height:192;">
+                    <img src="/images/Tatooine.jpg" style="width:192px;height:192;">
                 </a>
             </td>
             <td>Homeworlds</td>
@@ -49,7 +88,7 @@
         <tr>
             <td>
                 <a href="./ships.html">
-                    <img src="millennium_falcon.jpg" style="width:192px;height:145px;">
+                    <img src="/images/millennium_falcon.jpg" style="width:192px;height:145px;">
                 </a>
             </td>
             <td>Ships</td>
@@ -57,4 +96,3 @@
         </tr>
     </tbody>
     </table>
-</body>

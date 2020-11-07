@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#myDIV {
+  width: 25%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<button onclick="myFunction()">Character</button>
+
+<div style="display: none;" id="myDIV">
+    <form id="attributeForm">
+        <label for="attribute1">Select attribute 1:</label>
+        <select  name="attribute1" id="attribute1" form="attributeForm">
+            <option value=''>Select</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="birth_date">Birth Date</option>
+            <option value="gender">Gender</option>
+            <option value="species">Species</option>
+            <option value="height">Height</option>
+        </select>
+        <input type="text" placeholder="Search" name="search">
+        <br><br>
+        <label for="attribute2">Select attribute 2:</label>
+        <select  name="attribute2" id="attribute2" form="attributeForm">
+            <option value=''>Select</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="birth_date">Birth Date</option>
+            <option value="gender">Gender</option>
+            <option value="species">Species</option>
+            <option value="height">Height</option>
+        </select>
+        <input type="text" placeholder="Search" name="search">
+        <br><br>
+        <label for="attribute2">Select attribute 3:</label>
+        <select  name="attribute2" id="attribute2" form="attributeForm">
+            <option value=''>Select</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="birth_date">Birth Date</option>
+            <option value="gender">Gender</option>
+            <option value="species">Species</option>
+            <option value="height">Height</option>
+        </select>
+        <input type="text" placeholder="Search" name="search">
+        <br><br>
+        <label for="attribute2">Select attribute 4:</label>
+        <select  name="attribute2" id="attribute2" form="attributeForm">
+            <option value=''>Select</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="birth_date">Birth Date</option>
+            <option value="gender">Gender</option>
+            <option value="species">Species</option>
+            <option value="height">Height</option>
+        </select>
+        <input type="text" placeholder="Search" name="search">
+        <br><br>
+        <label for="attribute2">Select attribute 5:</label>
+        <select  name="attribute2" id="attribute2" form="attributeForm">
+            <option value=''>Select</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="birth_date">Birth Date</option>
+            <option value="gender">Gender</option>
+            <option value="species">Species</option>
+            <option value="height">Height</option>
+        </select>
+        <input type="text" placeholder="Search" name="search">
+        <br><br>
+        <label for="attribute2">Select attribute 6:</label>
+        <select  name="attribute2" id="attribute2" form="attributeForm">
+            <option value=''>Select</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="birth_date">Birth Date</option>
+            <option value="gender">Gender</option>
+            <option value="species">Species</option>
+            <option value="height">Height</option>
+        </select>
+        <input type="text" placeholder="Search" name="search">
+        <br><br>
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<style>
+    input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+}
+button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+table{
+    text-align: center;
+}
+</style>
+
+
+<h1>Star Wars Films</h1>
+<div>
+<table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
+    <thead>
+        <th>Name</th>
+        <th>Release Year</th>
+        <th>IMDB Rating</th>
+        <th>Director</th>
+    </thead>
+    <tbody>
+        {{#each films}}
+        <tr>
+            <td>{{name_of_movie}}</td>
+            <td>{{year_released}}</td>
+            <td>{{imdb_rating}}</td>
+            <td>{{directed_by}}</td>
+            <td><button onclick="deleteFilm({{film_id}})">Delete</button></td>
+            <td><a href="/films/{{film_id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addFilm" action="/films" method="POST">
+    Name of Movie: <input type="text" name="name_of_movie"><br>
+    Release Year: <input type="text" name="year_released"><br>
+    IMDB Rating: <input type="text" name="imdb_rating"><br>
+    Director:  <input type="text" name="directed_by"><br>
+    <input type="submit" value="Submit">
+    </form>
+</table>
+</div>

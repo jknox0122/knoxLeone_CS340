@@ -12,7 +12,13 @@ app.set('view engine', 'handlebars');
 app.set('port', 3196);
 app.set('mysql', mysql);
 
+//res.render('view', { title: 'my other page', layout: 'other' });
+app.get('/', (req, res) => res.render("index"));
 app.use('/characters', require('./characters.js'));
+app.use('/films', require('./films.js'));
+app.use('/', require('./characters.js'));
+app.use('/specificSearch', require('./characters.js'));
+app.use(express.static(__dirname+'/public'));
 
 app.use(function(req,res){
   res.status(404);
