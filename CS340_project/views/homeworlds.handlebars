@@ -54,6 +54,8 @@ table{
             <td>{{Population}}</td>
             <td>{{Climate}}</td>
             <td>{{Terrain}}</td>
+            <td><button onclick="deleteHomeworld({{WorldID}})">Delete</button></td>
+            <td><a href="/homeworlds/{{WorldID}}">Update</a></td>
         </tr>
         {{/each}}
     </tbody>
