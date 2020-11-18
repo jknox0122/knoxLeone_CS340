@@ -1,5 +1,5 @@
 <style>
-  input[type=text], select {
+    input[type=text], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -32,15 +32,16 @@ div {
   background-color: #f2f2f2;
   padding: 20px;
 }
+
 table{
-  text-align: center;
+    text-align: center;
 }
 </style>
 
 
-<h1>Star Wars Characters</h1>
+<h1>Star Wars Characters in Films</h1>
 <div>
-<table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
+<table id="characterFilm" class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
     <thead>
         <th>First Name</th>
         <th>Last Name</th>
@@ -50,7 +51,7 @@ table{
         <th>Height</th>
     </thead>
     <tbody>
-        {{#each characters}}
+        {{#each characterFilms}}
         <tr>
             <td>{{First_Name}}</td>
             <td>{{Last_Name}}</td>
@@ -58,19 +59,8 @@ table{
             <td>{{Gender}}</td>
             <td>{{Species}}</td>
             <td>{{Height}}</td>
-            <td><button onclick="deleteCharacter({{CharacterID}})">Delete</button></td>
-            <td><a href="/characters/{{CharacterID}}">Update</a></td>
         </tr>
         {{/each}}
     </tbody>
-    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addCharacter" action="/characters" method="POST">
-    First Name: <input type="text" name="First_Name"><br>
-    Last Name: <input type="text" name="Last_Name"><br>
-    Birth Date: <input type="text" name="Birthdate"><br>
-    Gender: <input type="text" name="Gender"><br>
-    Species: <input type="text" name="Species"><br>
-    Height: <input type="text" name="Height"><br>
-    <input type="submit" value="Submit">
-    </form>
 </table>
 </div>
