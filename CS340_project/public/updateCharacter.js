@@ -1,7 +1,7 @@
-  
-function updateCharacter(character_id){
+
+function updateCharacter(CharacterID){
     $.ajax({
-        url: '/characters/' + character_id,
+        url: `/characters/${CharacterID}`,
         type: 'PUT',
         data: $('#updateCharacter').serialize(),
         success: function(result){

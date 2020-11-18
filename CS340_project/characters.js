@@ -4,7 +4,7 @@ module.exports = function(){
     var app = express();
 
     function getCharacters(res,mysql,context,complete){
-        mysql.pool.query('SELECT character_id, first_name, last_name, birth_date, gender, species, height FROM characters', function(error,results,fields){
+        mysql.pool.query('SELECT CharacterID, First_Name, Last_Name, Birthdate, Gender, Species, Height FROM Characters', function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -14,9 +14,9 @@ module.exports = function(){
         });
     }
 
-    function getCharacter(res,mysql,context,character_id, complete){
-        var sql = "SELECT character_id, first_name, last_name, birth_date, gender, species, height FROM characters WHERE character_id = ?";
-        var inserts = [character_id];
+    function getCharacter(res, mysql, context, CharacterID, complete){
+        var sql = "SELECT CharacterID, First_Name, Last_Name, Birthdate, Gender, Species, Height FROM Characters WHERE CharacterID = ?";
+        var inserts = [CharacterID];
         mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -48,12 +48,12 @@ module.exports = function(){
     } )
 
 
-    router.get('/:character_id/', function(req,res){
+    router.get('/:CharacterID', function(req,res){
         callbackCount = 0;
         var context = {};
         context.jsscripts = ["updateCharacter.js"];
         var mysql = req.app.get('mysql');
-        getCharacter(res,mysql,context,req.params.character_id,complete);
+        getCharacter(res,mysql,context,req.params.CharacterID,complete);
         function complete(){
             callbackCount++;
             if(callbackCount >=1){
@@ -64,8 +64,8 @@ module.exports = function(){
 
     router.post('/',function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO characters ( first_name, last_name, birth_date, gender, species, height) VALUES (?,?,?,?,?,?)";
-        var inserts = [req.body.first_name, req.body.last_name, req.body.birth_date, req.body.gender, req.body.species, req.body.height];
+        var sql = "INSERT INTO Characters ( First_Name, Last_Name, Birthdate, Gender, Species, Height) VALUES (?,?,?,?,?,?)";
+        var inserts = [req.body.First_Name, req.body.Last_Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -76,11 +76,11 @@ module.exports = function(){
         });
     });
 
-    router.put('/:character_id', function(req,res){
+    router.put('/:CharacterID', function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE characters SET first_name=?, last_name=?, birth_date=?, gender=?, species=?, height=? WHERE character_id =?";
-        var inserts = [req.body.first_name, req.body.last_name, req.body.birth_date, req.body.gender, req.body.species, req.body.height, req.params.character_id];
-        sql = mysql.pool.query(sql,inserts,function(error, results,fields){
+        var sql = "UPDATE Characters SET First_Name = ?, Last_Name = ?, Birthdate = ?, Gender = ?, Species = ?, Height = ? WHERE CharacterID = ?";
+        var inserts = [req.body.First_Name, req.body.Last_Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height, req.params.CharacterID];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -91,10 +91,10 @@ module.exports = function(){
         });
     });
 
-    router.delete('/:character_id',function(req,res){
+    router.delete('/:CharacterID',function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM characters WHERE character_id = ?";
-        var inserts = [req.params.character_id];
+        var sql = "DELETE FROM Characters WHERE CharacterID = ?";
+        var inserts = [req.params.CharacterID];
         sql = mysql.pool.query(sql,inserts,function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));

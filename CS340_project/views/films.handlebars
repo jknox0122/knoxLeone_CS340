@@ -40,6 +40,7 @@ table{
 
 
 <h1>Star Wars Films</h1>
+{{!-- <a href="/characters_in_films">See Characters in Films</a> --}}
 <div>
 <table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
     <thead>
@@ -51,20 +52,20 @@ table{
     <tbody>
         {{#each films}}
         <tr>
-            <td>{{name_of_movie}}</td>
-            <td>{{year_released}}</td>
-            <td>{{imdb_rating}}</td>
-            <td>{{directed_by}}</td>
-            <td><button onclick="deleteFilm({{film_id}})">Delete</button></td>
-            <td><a href="/films/{{film_id}}">Update</a></td>
+            <td><a href="/characters_in_films/{{FilmID}}">{{Name_Of_Movie}}</a></td>
+            <td>{{Year_Released}}</td>
+            <td>{{IMBD_Rating}}</td>
+            <td>{{Directed_By}}</td>
+            <td><button onclick="deleteFilm({{FilmID}})">Delete</button></td>
+            <td><a href="/films/{{FilmID}}">Update</a></td>
         </tr>
         {{/each}}
     </tbody>
     <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addFilm" action="/films" method="POST">
-    Name of Movie: <input type="text" name="name_of_movie"><br>
-    Release Year: <input type="text" name="year_released"><br>
-    IMDB Rating: <input type="text" name="imdb_rating"><br>
-    Director:  <input type="text" name="directed_by"><br>
+    Name of Movie: <input type="text" name="Name_Of_Movie"><br>
+    Release Year: <input type="text" name="Year_Released"><br>
+    IMDB Rating: <input type="text" name="IMBD_Rating"><br>
+    Director:  <input type="text" name="Directed_By"><br>
     <input type="submit" value="Submit">
     </form>
 </table>

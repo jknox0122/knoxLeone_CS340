@@ -16,7 +16,9 @@ app.set('mysql', mysql);
 app.get('/', (req, res) => res.render("index"));
 app.use('/characters', require('./characters.js'));
 app.use('/films', require('./films.js'));
-app.use('/', require('./characters.js'));
+app.use('/homeworlds', require('./homeworlds'));
+app.use('/ships', require('./ships'));
+app.use('/characters_in_films', require('./charactersInFilms'));
 app.use('/specificSearch', require('./characters.js'));
 app.use(express.static(__dirname+'/public'));
 

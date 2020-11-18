@@ -35,15 +35,15 @@ div {
 }
 </style>
 
-<h1>Update {{character.first_name}} {{character.last_name}}:</h1>
+<h1>Update {{character.First_Name}} {{character.Last_Name}}</h1>
 <div>
 <form id="updateCharacter" action="/characters" method="post">
-    First name: <input type="text" name="first_name" value="{{character.first_name}}"><br>
-    Last name: <input type="text" name="last_name" value="{{character.last_name}}"><br>
-    Birth Date: <input type="text" name="birth_date" value="{{character.birth_date}}"><br>
-    Gender: <input type="text" name="gender" value="{{character.gender}}"><br>
-    Speices: <input type="text" name="species" value="{{character.species}}"><br>
-    Height: <input type="text" name="height" value="{{character.height}}"><br>
+    First name: <input type="text" name="First_Name" value="{{character.First_Name}}"><br>
+    Last name: <input type="text" name="Last_Name" value="{{character.Last_Name}}"><br>
+    Birth Date: <input type="text" name="Birthdate" value="{{character.Birthdate}}"><br>
+    Gender: <input type="text" name="Gender" value="{{character.Gender}}"><br>
+    Speices: <input type="text" name="Species" value="{{character.Species}}"><br>
+    Height: <input type="text" name="Height" value="{{character.Height}}"><br>
 </form>
-<button onclick="updateCharacter({{character.character_id}})">Update</button>
+<button onclick="updateCharacter({{character.CharacterID}})">Update</button>
 </div>

@@ -1,0 +1,68 @@
+<style>
+    input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+}
+button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+table{
+    text-align: center;
+}
+</style>
+
+
+<h1>Star Wars Homeworlds</h1>
+<div>
+<table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
+    <thead>
+        <th>Homeworld</th>
+        <th>Population</th>
+        <th>Climate</th>
+        <th>Terrain</th>
+    </thead>
+    <tbody>
+        {{#each homeworlds}}
+        <tr>
+            <td>{{Name}}</td>
+            <td>{{Population}}</td>
+            <td>{{Climate}}</td>
+            <td>{{Terrain}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addHomeworld" action="/homeworlds" method="POST">
+    Homeworld Name: <input type="text" name="Name"><br>
+    Population: <input type="text" name="Population"><br>
+    Climate: <input type="text" name="Climate"><br>
+    Terrain: <input type="text" name="Terrain"><br>
+    <input type="submit" value="Submit">
+    </form>
+</table>
+</div>

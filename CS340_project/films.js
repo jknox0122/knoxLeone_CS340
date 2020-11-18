@@ -4,7 +4,7 @@ module.exports = function(){
     var app = express();
 
     function getFilms(res,mysql,context,complete){
-        mysql.pool.query('SELECT film_id, name_of_movie, year_released, imdb_rating, directed_by FROM films', function(error,results,fields){
+        mysql.pool.query('SELECT FilmID, Name_Of_Movie, Year_Released, IMBD_Rating, Directed_By FROM Films', function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -14,9 +14,9 @@ module.exports = function(){
         });
     }
 
-    function getFilm(res,mysql,context,character_id, complete){
-        var sql = "SELECT film_id, name_of_movie, year_released, imdb_rating, directed_by FROM films WHERE film_id = ?";
-        var inserts = [film_id];
+    function getFilm(res,mysql,context, complete){
+        var sql = "SELECT FilmID, Name_Of_Movie, Year_Released, IMBD_Rating, Directed_By FROM Films WHERE FilmID = ?";
+        var inserts = [FilmID];
         mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
