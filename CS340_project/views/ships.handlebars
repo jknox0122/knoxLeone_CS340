@@ -61,6 +61,8 @@ tbody {
             <td>{{Crew_Size}}</td>
             <td>{{Length}}</td>
             <td>{{Model}}</td>
+            <td><button onclick="deleteShip({{ShipID}})">Delete</button></td>
+            <td><a href="/ships/{{ShipID}}">Update</a></td>
         </tr>
         {{/each}}
     </tbody>
