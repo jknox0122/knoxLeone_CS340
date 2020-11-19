@@ -35,11 +35,10 @@ div {
 }
 </style>
 
-<h1>Update {{character.First_Name}} {{character.Last_Name}}</h1>
+<h1>Update {{character.Name}} {{character.Last_Name}}</h1>
 <div>
 <form id="updateCharacter" action="/characters" method="post">
-    First name: <input type="text" name="First_Name" value="{{character.First_Name}}"><br>
-    Last name: <input type="text" name="Last_Name" value="{{character.Last_Name}}"><br>
+    First name: <input type="text" name="Name" value="{{character.Name}}"><br>
     Birth Date: <input type="text" name="Birthdate" value="{{character.Birthdate}}"><br>
     Gender: <input type="text" name="Gender" value="{{character.Gender}}"><br>
     Speices: <input type="text" name="Species" value="{{character.Species}}"><br>

@@ -52,8 +52,7 @@ table{
     <tbody>
         {{#each characters}}
         <tr>
-            <td>{{First_Name}}</td>
-            <td>{{Last_Name}}</td>
+            <td>{{Name}}</td>
             <td>{{Birthdate}}</td>
             <td>{{Gender}}</td>
             <td>{{Species}}</td>
@@ -64,7 +63,7 @@ table{
         {{/each}}
     </tbody>
     <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addCharacter" action="/characters" method="POST">
-    First Name: <input type="text" name="First_Name"><br>
+    First Name: <input type="text" name="Name"><br>
     Last Name: <input type="text" name="Last_Name"><br>
     Birth Date: <input type="text" name="Birthdate"><br>
     Gender: <input type="text" name="Gender"><br>

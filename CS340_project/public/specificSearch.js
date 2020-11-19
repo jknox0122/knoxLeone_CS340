@@ -7,9 +7,9 @@ function myFunction() {
     }
 }
 
-function specificSearch(first_name){
+function specificSearch(Name){
     $.ajax({
-        url: '/results/' + first_name,
+        url: '/results/' + Name,
         type: 'PUT',
         data: $('#specificSearch').serialize(),
         success: function(result){

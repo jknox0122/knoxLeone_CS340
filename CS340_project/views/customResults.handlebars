@@ -1,0 +1,62 @@
+<script>
+    window.onload = function(){
+        var cr = document.getElementById("Character_Results");
+        var fr = document.getElementById("Films_Results");
+        var selector = document.getElementById("Selector").value;
+        if(selector == "Films"){
+            cr.style.display = "none";
+        }
+        if(selector == "Characters"){
+            fr.style.display = "none";
+        }
+    }
+</script>
+<input type="hidden" value="{{selector}}" id="Selector">
+
+<h1>These are your custom results</h1>
+<div id= "Character_Results" name="Character_Results">
+<label for="characterTable">Character Results From filter: [Name: {{inserts.Char_Name}}] [Birth: {{inserts.Birthdate}}] [Gender: {{inserts.Gender}}] [Species: {{inserts.Species}}] [Film Appearance: {{inserts.Name_Of_Movie}}] [Homeworld: {{inserts.Name}}] [Piloted Ship: {{inserts.Piloted_Ships}}]</label>
+<table name="characterTable">
+    <thead>
+        <th>Name</th>
+        <th>Birthdate</th>
+        <th>Gender</th>
+        <th>Species</th>
+        <th>Height</th>
+        <th>Homeworld</th>
+    </thead>
+    <tbody>
+        {{#each context.Characters}}
+            <tr>
+                <td>{{Character_Name}}</td>
+                <td>{{Birthdate}}</td>
+                <td>{{Gender}}</td>
+                <td>{{Species}}</td>
+                <td>{{Height}}</td>
+                <td>{{Homeworld_Name}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+
+<div id= "Films_Results" name="Films_Results">
+<table>
+    <thead>
+        <th>Movie Name</th>
+        <th>Year Released</th>
+        <th>IMDB Rating</th>
+        <th>Director</th>
+    </thead>
+    <tbody>
+        {{#each context.Films}}
+            <tr>
+                <td>{{Name_Of_Movie}}</td>
+                <td>{{Year_Released}}</td>
+                <td>{{IMDB_Rating}}</td>
+                <td>{{Directed_By}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>

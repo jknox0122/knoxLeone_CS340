@@ -4,7 +4,7 @@ module.exports = function(){
     var app = express();
 
     function getCharacters(res,mysql,context,complete){
-        mysql.pool.query('SELECT CharacterID, First_Name, Last_Name, Birthdate, Gender, Species, Height FROM Characters', function(error,results,fields){
+        mysql.pool.query('SELECT CharacterID, Name, Birthdate, Gender, Species, Height FROM Characters', function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -15,7 +15,7 @@ module.exports = function(){
     }
 
     function getCharacter(res, mysql, context, CharacterID, complete){
-        var sql = "SELECT CharacterID, First_Name, Last_Name, Birthdate, Gender, Species, Height FROM Characters WHERE CharacterID = ?";
+        var sql = "SELECT CharacterID, Name, Birthdate, Gender, Species, Height FROM Characters WHERE CharacterID = ?";
         var inserts = [CharacterID];
         mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
@@ -64,8 +64,8 @@ module.exports = function(){
 
     router.post('/',function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Characters ( First_Name, Last_Name, Birthdate, Gender, Species, Height) VALUES (?,?,?,?,?,?)";
-        var inserts = [req.body.First_Name, req.body.Last_Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height];
+        var sql = "INSERT INTO Characters ( Name, Birthdate, Gender, Species, Height) VALUES (?,?,?,?,?,?)";
+        var inserts = [req.body.Name, req.bod, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -78,8 +78,8 @@ module.exports = function(){
 
     router.put('/:CharacterID', function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Characters SET First_Name = ?, Last_Name = ?, Birthdate = ?, Gender = ?, Species = ?, Height = ? WHERE CharacterID = ?";
-        var inserts = [req.body.First_Name, req.body.Last_Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height, req.params.CharacterID];
+        var sql = "UPDATE Characters SET Name = ? = ?, Birthdate = ?, Gender = ?, Species = ?, Height = ? WHERE CharacterID = ?";
+        var inserts = [req.body.Name, req.bod, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height, req.params.CharacterID];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
