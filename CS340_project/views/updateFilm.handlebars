@@ -34,13 +34,14 @@ div {
 }
 </style>
 
-<h1>Update {{film.name_of_movie}}:</h1>
+<h1>Update {{film.Name_Of_Movie}}</h1>
 <div>
 <form id="updateFilm" action="/films" method="post">
-    Movie Name: <input type="text" name="name_of_movie" value="{{film.name_of_movie}}"><br>
-    Release Year: <input type="text" name="year_released" value="{{film.year_released}}"><br>
-    IMDB Rating: <input type="text" name="imdb_rating" value="{{film.imdb_rating}}"><br>
-    Director: <input type="text" name="directed_by" value="{{film.directed_by}}"><br>
+    Movie Name: <input type="text" name="Name_Of_Movie" value="{{film.Name_Of_Movie}}"><br>
+    Release Year: <input type="text" name="Year_Released" value="{{film.Year_Released}}"><br>
+    IMDB Rating: <input type="text" name="IMDB_Rating" value="{{film.IMDB_Rating}}"><br>
+    Director: <input type="text" name="Directed_By" value="{{film.Directed_By}}"><br>
 </form>
-<button onclick="updateFilm({{film.film_id}})">Update</button>
+<button onclick="updateFilm({{film.FilmID}})">Update</button>
+<a href="/films"><button>Cancel</button></a>
 </div>

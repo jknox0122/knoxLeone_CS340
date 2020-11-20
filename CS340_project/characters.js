@@ -1,10 +1,10 @@
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
-    var app = express();
 
-    function getCharacters(res,mysql,context,complete){
-        mysql.pool.query('SELECT CharacterID, First_Name, Last_Name, Birthdate, Gender, Species, Height FROM Characters', function(error,results,fields){
+    function getCharacters(res,mysql,context, complete){
+        var sql = 'SELECT c.CharacterID, c.Name, c.Birthdate, c.Gender, c.Species, c.Height, h.Name as homeworld from Characters c LEFT JOIN Homeworlds h ON h.WorldID = c.WorldID';
+        mysql.pool.query(sql, function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -15,14 +15,25 @@ module.exports = function(){
     }
 
     function getCharacter(res, mysql, context, CharacterID, complete){
-        var sql = "SELECT CharacterID, First_Name, Last_Name, Birthdate, Gender, Species, Height FROM Characters WHERE CharacterID = ?";
+        var sql = "SELECT c.CharacterID, c.Name, c.Birthdate, c.Gender, c.Species, c.Height, h.Name as homeworld from Characters c LEFT JOIN Homeworlds h ON h.WorldID = c.WorldID WHERE c.CharacterID = ?";
         var inserts = [CharacterID];
-        mysql.pool.query(sql,inserts,function(error, results, fields){
+        mysql.pool.query(sql,inserts, (error, results, fields) => {
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
             context.character = results[0];
+            complete();
+        });
+    }
+
+    const getHomeworlds = (res, mysql, context, complete) => {
+        mysql.pool.query('SELECT WorldID, Name, Population, Climate, Terrain FROM Homeworlds', (err, results, fields) => {
+            if(err) {
+                res.write(JSON.stringify(err));
+                res.end();
+            }
+            context.homeworlds = results;
             complete();
         });
     }
@@ -33,9 +44,10 @@ module.exports = function(){
         context.jsscripts = ["deleteCharacter.js"];
         var mysql = req.app.get('mysql');
         getCharacters(res,mysql,context,complete);
+        getHomeworlds(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >=1){
+            if(callbackCount >= 2){
                 res.render('characters',context);
             }
         }
@@ -54,9 +66,10 @@ module.exports = function(){
         context.jsscripts = ["updateCharacter.js"];
         var mysql = req.app.get('mysql');
         getCharacter(res,mysql,context,req.params.CharacterID,complete);
+        getHomeworlds(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >=1){
+            if(callbackCount >= 2){
                 res.render('updateCharacter',context);
             }
         }
@@ -64,13 +77,14 @@ module.exports = function(){
 
     router.post('/',function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Characters ( First_Name, Last_Name, Birthdate, Gender, Species, Height) VALUES (?,?,?,?,?,?)";
-        var inserts = [req.body.First_Name, req.body.Last_Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+        var sql = "INSERT INTO Characters (Name, Birthdate, Gender, Species, Height, WorldID) VALUES (?,?,?,?,?,?)";
+        var inserts = [req.body.Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height, req.body.WorldID];
+        sql = mysql.pool.query(sql, inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             } else{
+                console.log(req.body);
                 res.redirect('/characters');
             }
         });
@@ -78,8 +92,8 @@ module.exports = function(){
 
     router.put('/:CharacterID', function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Characters SET First_Name = ?, Last_Name = ?, Birthdate = ?, Gender = ?, Species = ?, Height = ? WHERE CharacterID = ?";
-        var inserts = [req.body.First_Name, req.body.Last_Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height, req.params.CharacterID];
+        var sql = "UPDATE Characters SET Name = ?, Birthdate = ?, Gender = ?, Species = ?, Height = ?, WorldID = ? WHERE CharacterID = ?";
+        var inserts = [req.body.Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height, req.body.WorldID, req.params.CharacterID];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));

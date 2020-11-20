@@ -39,28 +39,37 @@ table{
 </style>
 
 
-<h1>Star Wars Characters in Films</h1>
+<h1>Star Wars Characters in Films {{characterFilms.FilmID}}</h1>
+<a href="/films">Back To Films</a>
 <div>
 <table id="characterFilm" class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
     <thead>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>Name</th>
         <th>Birth Date</th>
         <th>Gender</th>
         <th>Species</th>
         <th>Height</th>
+        <th>Homeworld</th>
     </thead>
     <tbody>
         {{#each characterFilms}}
         <tr>
-            <td>{{First_Name}}</td>
-            <td>{{Last_Name}}</td>
+            <td>{{Name}}</td>
             <td>{{Birthdate}}</td>
             <td>{{Gender}}</td>
             <td>{{Species}}</td>
             <td>{{Height}}</td>
+            <td>{{homeworld}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<form id="addCharacterInFilm" action="/character_in_films/{{this.FilmID}}" method="POST">
+  Characters: <select name="CharacterID"> 
+    {{#each characters}}
+      <option value="{{CharacterID}}">{{Name}}</option>
+    {{/each}}
+  </select>
+  <input type="submit" value="Submit" />
+</form>
 </div>

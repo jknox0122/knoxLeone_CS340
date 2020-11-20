@@ -4,7 +4,7 @@ module.exports = function(){
     var app = express();
 
     function getFilms(res,mysql,context,complete){
-        mysql.pool.query('SELECT FilmID, Name_Of_Movie, Year_Released, IMBD_Rating, Directed_By FROM Films', function(error,results,fields){
+        mysql.pool.query('SELECT FilmID, Name_Of_Movie, Year_Released, IMDB_Rating, Directed_By FROM Films', function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -14,8 +14,8 @@ module.exports = function(){
         });
     }
 
-    function getFilm(res,mysql,context, complete){
-        var sql = "SELECT FilmID, Name_Of_Movie, Year_Released, IMBD_Rating, Directed_By FROM Films WHERE FilmID = ?";
+    function getFilm(res,mysql,context, FilmID, complete){
+        var sql = "SELECT FilmID, Name_Of_Movie, Year_Released, IMDB_Rating, Directed_By FROM Films WHERE FilmID = ?";
         var inserts = [FilmID];
         mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
@@ -41,12 +41,12 @@ module.exports = function(){
         }
     });
 
-    router.get('/:film_id/', function(req,res){
+    router.get('/:FilmID/', function(req,res){
         callbackCount = 0;
         var context = {};
         context.jsscripts = ["updateCharacter.js"];
         var mysql = req.app.get('mysql');
-        getFilm(res,mysql,context,req.params.film_id,complete);
+        getFilm(res,mysql,context,req.params.FilmID,complete);
         function complete(){
             callbackCount++;
             if(callbackCount >=1){
@@ -57,8 +57,8 @@ module.exports = function(){
 
     router.post('/',function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO films (name_of_movie, year_released, imdb_rating, directed_by) VALUES (?,?,?,?)";
-        var inserts = [req.body.name_of_movie, req.body.year_released, req.body.imdb_rating, req.body.directed_by];
+        var sql = "INSERT INTO Films (Name_Of_Movie, Year_Released, IMDB_Rating, Directed_By) VALUES (?,?,?,?)";
+        var inserts = [req.body.Name_Of_Movie, req.body.Year_Released, req.body.IMDB_Rating, req.body.Directed_By];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -69,10 +69,10 @@ module.exports = function(){
         });
     });
 
-    router.put('/:film_id', function(req,res){
+    router.put('/:FilmID', function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE films SET name_of_movie=?, year_released=?, imdb_rating=?, directed_by=? WHERE film_id =?";
-        var inserts = [req.body.name_of_movie, req.body.year_released, req.body.imdb_rating, req.body.directed_by, req.params.film_id];
+        var sql = "UPDATE Films SET Name_Of_Movie=?, Year_Released=?, IMDB_Rating=?, Directed_By=? WHERE FilmID =?";
+        var inserts = [req.body.Name_Of_Movie, req.body.Year_Released, req.body.IMDB_Rating, req.body.Directed_By, req.params.FilmID];
         sql = mysql.pool.query(sql,inserts,function(error, results,fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -86,7 +86,7 @@ module.exports = function(){
 
     router.delete('/:film_id',function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM films WHERE film_id = ?";
+        var sql = "DELETE FROM Films WHERE FilmID = ?";
         var inserts = [req.params.film_id];
         sql = mysql.pool.query(sql,inserts,function(error,results,fields){
             if(error){

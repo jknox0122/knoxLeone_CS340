@@ -14,7 +14,7 @@ function updateFilm(film_id){
     $.ajax({
         url: '/films/' + film_id,
         type: 'PUT',
-        data: $('#updateCharacter').serialize(),
+        data: $('#updateFilm').serialize(),
         success: function(result){
             window.location.replace("./");
         }

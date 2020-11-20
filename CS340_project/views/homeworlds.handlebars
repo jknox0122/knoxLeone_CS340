@@ -39,6 +39,7 @@ table{
 
 
 <h1>Star Wars Homeworlds</h1>
+<a href="/">Home</a>
 <div>
 <table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
     <thead>
@@ -55,7 +56,7 @@ table{
             <td>{{Climate}}</td>
             <td>{{Terrain}}</td>
             <td><button onclick="deleteHomeworld({{WorldID}})">Delete</button></td>
-            <td><a href="/homeworlds/{{WorldID}}">Update</a></td>
+            <td><a href="/homeworlds/{{WorldID}}"><button>Update</button></a></td>
         </tr>
         {{/each}}
     </tbody>
