@@ -43,9 +43,9 @@ div {
     Gender: <input type="text" name="Gender" value="{{character.Gender}}"><br>
     Speices: <input type="text" name="Species" value="{{character.Species}}"><br>
     Height: <input type="text" name="Height" value="{{character.Height}}"><br>
-    Homeworld: <select name="WorldID"> 
+    Homeworld: <select name="WorldID">
       {{#each homeworlds}}
-        <option value="{{WorldID}}">{{Name}}</option>
+        <option value="{{WorldID}}" selected>{{Name}}</option>
       {{/each}}
     </select>
 </form>

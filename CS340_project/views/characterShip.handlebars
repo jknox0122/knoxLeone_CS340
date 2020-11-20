@@ -35,7 +35,7 @@ div {
 table{
   text-align: center;
 }
-
+ 
 </style>
 
 <h1>Characters Pilot Ships</h1>
@@ -45,13 +45,16 @@ table{
         <thead>
             <th>Name</th>
             <th>Ship</th>
+            {{!-- <th>Model</th> --}}
         </thead>
         <tbody>
             {{#each characterShip}}
                 <tr>
                     <td>{{Name}}</td>
                     <td>{{Ship_Name}}</td>
+                    {{!-- <td>{{Model}}</td> --}}
                     <td><button onclick="deleteCharacterShip({{ShipID}}, {{CharacterID}})">Delete</button></td>
+                    {{!-- <td><a href="add_character_ship/edit/ship/{{ShipID}}/character/{{CharacterID}}"><button>Update</button></a></td> --}}
                 </tr>
             {{/each}}
         </tbody>

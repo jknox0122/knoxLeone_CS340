@@ -3,7 +3,7 @@ module.exports = function(){
     var router = express.Router();
 
     const getCharactersInFilm = (res, mysql, context, FilmID, complete) => {
-        var sql = 'SELECT c.Name, c.Birthdate, c.Gender, c.Species, c.Height, h.Name AS homeworld, f.Name_Of_Movie, f.FilmID FROM Characters c INNER JOIN Characters_In_Films cf ON cf.CharacterID = c.CharacterID LEFT JOIN Homeworlds h ON h.WorldID = c.WorldID INNER JOIN Films f ON f.FilmID = cf.FilmID WHERE cf.FilmID = ?';
+        var sql = 'SELECT c.CharacterID, c.Name, c.Birthdate, c.Gender, c.Species, c.Height, h.Name AS homeworld, f.Name_Of_Movie, f.FilmID FROM Characters c INNER JOIN Characters_In_Films cf ON c.CharacterID = cf.CharacterID LEFT JOIN Homeworlds h ON h.WorldID = c.WorldID INNER JOIN Films f ON f.FilmID = cf.FilmID WHERE f.FilmID = ?';
         var inserts = [FilmID];
         mysql.pool.query(sql, inserts, (error, results, fields) => {
             if(error) {
@@ -27,26 +27,13 @@ module.exports = function(){
         });
     }
 
-    function getFilm(res,mysql,context, complete){
-        var sql = "SELECT FilmID FROM Characters_In_Films WHERE FilmID = ?";
-        var inserts = [FilmID];
-        mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.film = results[0];
-            complete();
-        });
-    }
-
     router.get('/:FilmID', (req, res) => {
         var callbackCount = 0;
         var context = {};
+        context.jsscripts = ['deleteCharacterFilm.js']
         var mysql = req.app.get('mysql');
         getCharactersInFilm(res, mysql, context, req.params.FilmID, complete);
         getCharacters(res, mysql, context, complete);
-        // getFilm(res, mysql, context, req.params.FilmID, complete);
         function complete() {
             callbackCount++;
             if(callbackCount >= 2) {
@@ -55,17 +42,16 @@ module.exports = function(){
         }
     });
 
-    router.post('/:FilmID', (req,res) => {
+    router.delete('/Film/:FilmID/Character/:CharacterID', (req, res) => {
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Characters_In_Films (FilmID, CharacterID) VALUES ( (SELECT f.FilmID FROM Films f WHERE f.FilmID = ?), (SELECT c.CharacterID FROM Characters c WHERE c.CharacterID = ?) );";
-        var inserts = [req.body.Name, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height, req.body.WorldID, req.params.FilmID];
-        sql = mysql.pool.query(sql, inserts, (error, results, fields) => {
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            } else{
-                console.log(req.body);
-                res.redirect('/characters_in_films/:FilmID');
+        var sql = 'DELETE FROM Characters_In_Films WHERE FilmID = ? AND CharacterID = ?';
+        var inserts = [req.params.FilmID, req.params.CharacterID];
+        sql = mysql.pool.query(sql, inserts, (err, results, fields) => {
+            if(err) {
+                res.write(JSON.stringify(err));
+                res.status(400).end();
+            } else {
+                res.status(202).end();
             }
         });
     });

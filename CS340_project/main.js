@@ -20,6 +20,7 @@ app.use('/homeworlds', require('./homeworlds'));
 app.use('/ships', require('./ships'));
 app.use('/characters_in_films', require('./charactersInFilms'));
 app.use('/add_character_ship', require('./addCharacterShip'));
+app.use('/add_characters_in_films', require('./addCharacterToFilm'));
 app.use('/specificSearch', require('./characters.js'));
 app.use(express.static(__dirname+'/public'));
 
