@@ -78,7 +78,7 @@ module.exports = function(){
 
     router.put('/:CharacterID', function(req,res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Characters SET Name = ? = ?, Birthdate = ?, Gender = ?, Species = ?, Height = ? WHERE CharacterID = ?";
+        var sql = "UPDATE Characters SET Name = ?, Birthdate = ?, Gender = ?, Species = ?, Height = ? WHERE CharacterID = ?";
         var inserts = [req.body.Name, req.bod, req.body.Birthdate, req.body.Gender, req.body.Species, req.body.Height, req.params.CharacterID];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
