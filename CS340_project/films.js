@@ -9,7 +9,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.films = results;
+            context.Films = results;
             complete();
         });
     }
@@ -36,7 +36,7 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >=1){
-                res.render('films',context);
+                res.render('Films',context);
             }
         }
     });
@@ -64,7 +64,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             } else{
-                res.redirect('/films');
+                res.redirect('/Films');
             }
         });
     });
@@ -84,10 +84,10 @@ module.exports = function(){
         });
     });
 
-    router.delete('/:film_id',function(req,res){
+    router.delete('/:FilmID',function(req,res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Films WHERE FilmID = ?";
-        var inserts = [req.params.film_id];
+        var inserts = [req.params.FilmID];
         sql = mysql.pool.query(sql,inserts,function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));

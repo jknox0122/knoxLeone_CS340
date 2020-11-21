@@ -3,19 +3,21 @@
 <table class="results-table">
     <thead>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
+            <th>Birthdate</th>
+            <th>Gender</th>
+            <th>Species</th>
+            <th>Height</th>
         </tr>
     </thead>
     <tbody>
         {{#each character}}
         <tr>
-            <td>{{first_name}}</td>
-            <td>{{last_name}}</td>
-            <td>{{birth_date}}</td>
-            <td>{{gender}}</td>
-            <td>{{species}}</td>
-            <td>{{height}}</td>
+            <td>{{Name}}</td>
+            <td>{{Birthdate}}</td>
+            <td>{{Gender}}</td>
+            <td>{{Species}}</td>
+            <td>{{Height}}</td>
         </tr>
         {{/each}}
     </tbody>

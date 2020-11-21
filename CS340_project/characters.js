@@ -2,14 +2,12 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    function getCharacters(res,mysql,context, complete){
         var sql = 'SELECT c.CharacterID, c.Name, c.Birthdate, c.Gender, c.Species, c.Height, h.Name as homeworld from Characters c LEFT JOIN Homeworlds h ON h.WorldID = c.WorldID';
         mysql.pool.query(sql, function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
-                res.end();
+                res.end;
             }
-            context.characters = results;
             complete();
         });
     }
