@@ -46,7 +46,8 @@ tbody {
 
 
 <h1>Star Wars Ships</h1>
-<h2><a href="/">HOME PAGE</a></h2>
+<a href="/add_character_ship">Add Character To Ship</a>
+<a href="/">Home</a>
 <div>
 <table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
     <thead>
@@ -63,16 +64,16 @@ tbody {
             <td>{{Length}}</td>
             <td>{{Model}}</td>
             <td><button onclick="deleteShip({{ShipID}})">Delete</button></td>
-            <td><a href="/ships/{{ShipID}}">Update</a></td>
+            <td><a href="/ships/{{ShipID}}"><button>Update</button></a></td>
         </tr>
         {{/each}}
     </tbody>
     <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addShip" action="/ships" method="POST">
-    Ship Name: <input type="text" name="Name"><br>
-    Crew Size: <input type="text" name="Crew_Size"><br>
-    Length: <input type="text" name="Length"><br>
-    Model: <input type="text" name="Model"><br>
-    <input type="submit" value="Submit">
+        Ship Name: <input type="text" name="Name"><br>
+        Crew Size: <input type="text" name="Crew_Size"><br>
+        Length: <input type="text" name="Length"><br>
+        Model: <input type="text" name="Model"><br>
+        <input type="submit" value="Submit">
     </form>
 </table>
 </div>

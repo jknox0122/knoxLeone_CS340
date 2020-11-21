@@ -1,0 +1,57 @@
+<style>
+  input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+}
+button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+table{
+  text-align: center;
+}
+ 
+</style>
+
+<div>
+    <form id="updateCharacterShip" action="/add_character_ship" method="post">
+        Ships: <select name="ShipID">
+            {{#each ships}}
+                <option value="{{ShipID}}" selected>{{Ship_Name}}</option>
+            {{/each}}
+        </select>
+
+        Character: <select name="CharacterID">
+            {{#each characters}}
+                <option value="{{CharacterID}}" selected>{{Name}}</option>
+            {{/each}}
+        </select>
+      <button onclick="updateCharacterShip({{cs.ShipID}},{{cs.CharacterID}})">Update</button>
+      <a href="/add_character_ship"><button>Cancel</button></a>
+    </form>
+</div>

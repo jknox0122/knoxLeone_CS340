@@ -39,27 +39,32 @@ table{
 </style>
 
 
-<h1>Star Wars Characters in Films</h1>
+<h1>Star Wars Characters in Films {{films.Name_Of_Movie}}</h1>
+<a href="/films">Back To Films</a>
 <div>
-<table id="characterFilm" class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
-    <thead>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Birth Date</th>
-        <th>Gender</th>
-        <th>Species</th>
-        <th>Height</th>
-    </thead>
-    <tbody>
-        {{#each characterFilms}}
-        <tr>
-            <td>{{Name}}</td>
-            <td>{{Birthdate}}</td>
-            <td>{{Gender}}</td>
-            <td>{{Species}}</td>
-            <td>{{Height}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+  <table id="characterFilm" class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
+      <thead>
+          <th>Name</th>
+          <th>Birth Date</th>
+          <th>Gender</th>
+          <th>Species</th>
+          <th>Height</th>
+          <th>Homeworld</th>
+      </thead>
+      <tbody>
+          {{#each characterFilms}}
+          <tr>
+              <td>{{Name}}</td>
+              <td>{{Birthdate}}</td>
+              <td>{{Gender}}</td>
+              <td>{{Species}}</td>
+              <td>{{Height}}</td>
+              <td>{{homeworld}}</td>
+              <td><button onclick="deleteCharacterFilm({{FilmID}}, {{CharacterID}})">Delete</button></td>
+          </tr>
+          {{/each}}
+      </tbody>
+  </table>
+  <h2>Dont See A Character?</h2>
+  <a href="/add_characters_in_films">Add Character To Film</a>
 </div>

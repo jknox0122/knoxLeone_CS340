@@ -14,7 +14,7 @@ module.exports = function(){
         });
     }
 
-    function getFilm(res,mysql,context, complete){
+    function getFilm(res,mysql,context, FilmID, complete){
         var sql = "SELECT FilmID, Name_Of_Movie, Year_Released, IMDB_Rating, Directed_By FROM Films WHERE FilmID = ?";
         var inserts = [FilmID];
         mysql.pool.query(sql,inserts,function(error, results, fields){
