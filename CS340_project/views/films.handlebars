@@ -58,17 +58,17 @@ h2{
         <tr>
             <td><a href="/characters_in_films/{{FilmID}}">{{Name_Of_Movie}}</a></td>
             <td>{{Year_Released}}</td>
-            <td>{{IMDB}}</td>
+            <td>{{IMDB_Rating}}</td>
             <td>{{Directed_By}}</td>
             <td><button onclick="deleteFilm({{FilmID}})">Delete</button></td>
-            <td><a href="/films/{{FilmID}}">Update</a></td>
+            <td><a href="/films/{{FilmID}}"><button>Update</button></a></td>
         </tr>
         {{/each}}
     </tbody>
     <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addFilm" action="/films" method="POST">
     Name of Movie: <input type="text" name="Name_Of_Movie"><br>
     Release Year: <input type="text" name="Year_Released"><br>
-    IMDB Rating: <input type="text" name="IMDB"><br>
+    IMDB Rating: <input type="text" name="IMDB_Rating"><br>
     Director:  <input type="text" name="Directed_By"><br>
     <input type="submit" value="Submit">
     </form>
