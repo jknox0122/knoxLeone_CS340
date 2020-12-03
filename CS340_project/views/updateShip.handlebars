@@ -35,6 +35,12 @@ div {
 }
 </style>
 
+<script>
+    const alertSuccess = () => {
+        alert(`{{ship.Name}} has been updated.`);
+    }
+</script>
+
 <h1>Update {{ship.Name}}</h1>
 <div>
 <form id="updateShip" action="/ships" method="post">
@@ -43,6 +49,6 @@ div {
     Length: <input type="text" name="Length" value="{{ship.Length}}"><br>
     Model: <input type="text" name="Model" value="{{ship.Model}}"><br>
 </form>
-<button onclick="updateShip({{ship.ShipID}})">Update</button>
+<button onclick="updateShip({{ship.ShipID}}); alertSuccess()">Update</button>
 <a href="/ships"><button>Cancel</button></a>
 </div>

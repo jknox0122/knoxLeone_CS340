@@ -9,7 +9,7 @@
     box-sizing: border-box;
 }
 
-h1{
+h1, h2{
     text-align: center;
 }
 button {
@@ -42,12 +42,26 @@ tbody {
     border-color: inherit;
 }
 
+h2 {
+    text-align: center;
+}
+
 </style>
+
+<script>
+    const alertSuccess = () => {
+        alert(`Ship has been added.`);
+    }
+
+    const deleteSuccess = (ShipID) => {
+        alert(`Ship has been deleted`);
+    }
+</script>
 
 
 <h1>Star Wars Ships</h1>
-<a href="/add_character_ship">Add Character To Ship</a>
-<a href="/">Home</a>
+<h2><a href="/">Home</a></h2>
+<h2><a href="/add_character_ship">Add Character To Ship</a></h2>
 <div>
 <table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
     <thead>
@@ -63,12 +77,12 @@ tbody {
             <td>{{Crew_Size}}</td>
             <td>{{Length}}</td>
             <td>{{Model}}</td>
-            <td><button onclick="deleteShip({{ShipID}})">Delete</button></td>
+            <td><button onclick="deleteShip({{ShipID}}); deleteSuccess({{ShipID}})">Delete</button></td>
             <td><a href="/ships/{{ShipID}}"><button>Update</button></a></td>
         </tr>
         {{/each}}
     </tbody>
-    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addShip" action="/ships" method="POST">
+    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addShip" action="/ships" method="POST" onsubmit="alertSuccess()">
         Ship Name: <input type="text" name="Name"><br>
         Crew Size: <input type="text" name="Crew_Size"><br>
         Length: <input type="text" name="Length"><br>

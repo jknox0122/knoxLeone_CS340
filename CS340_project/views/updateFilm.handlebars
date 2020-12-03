@@ -34,7 +34,13 @@ div {
 }
 </style>
 
-<h1>Update {{film.Name_Of_Movie}}</h1>
+<script>
+    const alertSuccess = () => {
+        alert(`{{film.Name_Of_Movie}} has been updated.`);
+    }
+</script>
+
+<h1>Update {{film.Name_Of_Movie}}:</h1>
 <div>
 <form id="updateFilm" action="/films" method="post">
     Movie Name: <input type="text" name="Name_Of_Movie" value="{{film.Name_Of_Movie}}"><br>
@@ -42,6 +48,5 @@ div {
     IMDB Rating: <input type="text" name="IMDB_Rating" value="{{film.IMDB_Rating}}"><br>
     Director: <input type="text" name="Directed_By" value="{{film.Directed_By}}"><br>
 </form>
-<button onclick="updateFilm({{film.FilmID}})">Update</button>
-<a href="/films"><button>Cancel</button></a>
+<button onclick="updateFilm({{film.FilmID}}); alertSuccess()">Update</button>
 </div>

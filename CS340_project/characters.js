@@ -2,12 +2,12 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    function getCharacters(res,mysql,context, complete){
+    function getCharacters(res, mysql, context, complete){
         var sql = 'SELECT c.CharacterID, c.Name, c.Birthdate, c.Gender, c.Species, c.Height, h.Name as homeworld from Characters c LEFT JOIN Homeworlds h ON h.WorldID = c.WorldID';
         mysql.pool.query(sql, function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
-                res.end();
+                res.end;
             }
             context.characters = results;
             complete();
@@ -28,7 +28,7 @@ module.exports = function(){
     }
 
     const getHomeworlds = (res, mysql, context, complete) => {
-        mysql.pool.query('SELECT WorldID, Name, Population, Climate, Terrain FROM Homeworlds', (err, results, fields) => {
+        mysql.pool.query('SELECT WorldID, Name, Population, Climate, Terrain FROM Homeworlds ORDER BY Name ASC', (err, results, fields) => {
             if(err) {
                 res.write(JSON.stringify(err));
                 res.end();
@@ -57,7 +57,7 @@ module.exports = function(){
         var context = {};
         context.jsscripts = ["specificSearch.js"];
         res.render('specificSearch',context);
-    } )
+    })
 
 
     router.get('/:CharacterID', function(req,res){

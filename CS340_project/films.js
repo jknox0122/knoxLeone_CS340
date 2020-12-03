@@ -9,7 +9,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.films = results;
+            context.Films = results;
             complete();
         });
     }
@@ -35,14 +35,14 @@ module.exports = function(){
         getFilms(res,mysql,context,complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >=1){
+            if(callbackCount >= 1){
                 res.render('films',context);
             }
         }
     });
 
     router.get('/:FilmID/', function(req,res){
-        callbackCount = 0;
+        var callbackCount = 0;
         var context = {};
         context.jsscripts = ["updateCharacter.js"];
         var mysql = req.app.get('mysql');
@@ -84,10 +84,10 @@ module.exports = function(){
         });
     });
 
-    router.delete('/:film_id',function(req,res){
+    router.delete('/:FilmID',function(req,res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Films WHERE FilmID = ?";
-        var inserts = [req.params.film_id];
+        var inserts = [req.params.FilmID];
         sql = mysql.pool.query(sql,inserts,function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));

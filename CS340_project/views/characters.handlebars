@@ -35,11 +35,24 @@ div {
 table{
   text-align: center;
 }
+h2{
+  text-align: center;
+}
 </style>
+
+<script>
+    const alertSuccess = () => {
+        alert(`Character has been added.`);
+    }
+
+    const deleteSuccess = (CharacterID) => {
+      alert(`Character has been deleted`);
+    }
+</script>
 
 
 <h1>Star Wars Characters</h1>
-<a href="/">Home</a>
+<h2><a href="/">HOME PAGE</a></h2>
 <div>
 <table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
     <thead>
@@ -59,12 +72,12 @@ table{
             <td>{{Species}}</td>
             <td>{{Height}}</td>
             <td>{{homeworld}}</td>
-            <td><button onclick="deleteCharacter({{CharacterID}})">Delete</button></td>
+            <td><button onclick="deleteCharacter({{CharacterID}}); deleteSuccess({{CharacterID}})">Delete</button></td>
             <td><a href="/characters/{{CharacterID}}"><button>Update</button></a></td>
         </tr>
         {{/each}}
     </tbody>
-    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addCharacter" action="/characters" method="POST">
+    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addCharacter" action="/characters" method="POST" onsubmit="alertSuccess()">
     Name: <input type="text" name="Name"><br>
     Birth Date: <input type="text" name="Birthdate"><br>
     Gender: <input type="text" name="Gender"><br>

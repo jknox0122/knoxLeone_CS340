@@ -9,7 +9,7 @@
     box-sizing: border-box;
 }
 
-h1{
+h1, h2{
     text-align: center;
 }
 button {
@@ -37,9 +37,19 @@ table{
 }
 </style>
 
+<script>
+    const alertSuccess = () => {
+        alert(`Homeworld has been added.`);
+    }
+
+    const deleteSuccess = (WorldID) => {
+        alert(`Homeworld has been deleted`);
+    }
+</script>
+
 
 <h1>Star Wars Homeworlds</h1>
-<a href="/">Home</a>
+<h2><a href="/">HOME PAGE</a></h2>
 <div>
 <table class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
     <thead>
@@ -55,12 +65,12 @@ table{
             <td>{{Population}}</td>
             <td>{{Climate}}</td>
             <td>{{Terrain}}</td>
-            <td><button onclick="deleteHomeworld({{WorldID}})">Delete</button></td>
+            <td><button onclick="deleteHomeworld({{WorldID}}); deleteSuccess({{WorldID}})">Delete</button></td>
             <td><a href="/homeworlds/{{WorldID}}"><button>Update</button></a></td>
         </tr>
         {{/each}}
     </tbody>
-    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addHomeworld" action="/homeworlds" method="POST">
+    <form style="width: 60 rem; margin:auto; margin-top: 2rem;" id="addHomeworld" action="/homeworlds" method="POST" onsubmit="alertSuccess()">
     Homeworld Name: <input type="text" name="Name"><br>
     Population: <input type="text" name="Population"><br>
     Climate: <input type="text" name="Climate"><br>

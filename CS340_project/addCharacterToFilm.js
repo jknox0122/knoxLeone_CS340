@@ -3,7 +3,7 @@ module.exports = function() {
     var router = express.Router();
 
     function getFilms(res,mysql,context,complete){
-        mysql.pool.query('SELECT FilmID, Name_Of_Movie FROM Films', function(error,results,fields){
+        mysql.pool.query('SELECT FilmID, Name_Of_Movie FROM Films ORDER BY Name_Of_Movie ASC', function(error,results,fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -14,7 +14,7 @@ module.exports = function() {
     }
 
     function getCharacters(res, mysql, context, complete){
-        mysql.pool.query("SELECT CharacterID, Name FROM Characters", function(error, results, fields){
+        mysql.pool.query("SELECT CharacterID, Name FROM Characters ORDER BY Name ASC", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -24,28 +24,28 @@ module.exports = function() {
         });
     }
 
-    const getCharactersInFilm = (res, mysql, context, complete) => {
-        var sql = 'SELECT cf.FilmID, cf.CharacterID, c.Name, f.Name_Of_Movie FROM Characters c INNER JOIN Characters_In_Films cf ON c.CharacterID = cf.CharacterID INNER JOIN Films f ON f.FilmID = cf.FilmID';
-        mysql.pool.query(sql, (error, results, fields) => {
-            if(error) {
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.characterFilms = results;
-            complete();
-        });
-    }
+    // const getCharactersInFilm = (res, mysql, context, complete) => {
+    //     var sql = 'SELECT cf.FilmID, cf.CharacterID, c.Name, f.Name_Of_Movie FROM Characters c INNER JOIN Characters_In_Films cf ON c.CharacterID = cf.CharacterID INNER JOIN Films f ON f.FilmID = cf.FilmID';
+    //     mysql.pool.query(sql, (error, results, fields) => {
+    //         if(error) {
+    //             res.write(JSON.stringify(error));
+    //             res.end();
+    //         }
+    //         context.characterFilms = results;
+    //         complete();
+    //     });
+    // }
 
     router.get('/', (req, res) => {
         var callbackCount = 0;
         var context = {};
         var mysql = req.app.get('mysql');
-        getCharactersInFilm(res, mysql, context, complete);
+        // getCharactersInFilm(res, mysql, context, complete);
         getCharacters(res, mysql, context, complete);
         getFilms(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if(callbackCount >= 3) {
+            if(callbackCount >= 2) {
                 res.render('addCharactersInFilms', context);
             }
         }

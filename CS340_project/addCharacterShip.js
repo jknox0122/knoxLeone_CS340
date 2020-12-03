@@ -3,7 +3,7 @@ module.exports = function() {
     var router = express.Router();
 
     const getShips = (res, mysql, context, complete) => {
-        mysql.pool.query('SELECT ShipID, Name AS Ship_Name FROM Piloted_Ships', (err, results, fields) =>{
+        mysql.pool.query('SELECT ShipID, Name AS Ship_Name FROM Piloted_Ships ORDER BY Name ASC', (err, results, fields) =>{
             if(err) {
                 res.write(JSON.stringify(err));
                 res.end();
@@ -14,7 +14,7 @@ module.exports = function() {
     }
 
     function getCharacters(res, mysql, context, complete){
-        mysql.pool.query("SELECT CharacterID, Name FROM Characters", function(error, results, fields){
+        mysql.pool.query("SELECT CharacterID, Name FROM Characters ORDER BY Name ASC", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();

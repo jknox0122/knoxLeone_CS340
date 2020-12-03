@@ -9,7 +9,7 @@ app.engine('handlebars', handlebars.engine);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static',express.static('public'));
 app.set('view engine', 'handlebars');
-app.set('port', 3196);
+app.set('port', 3199);
 app.set('mysql', mysql);
 
 //res.render('view', { title: 'my other page', layout: 'other' });
@@ -22,6 +22,8 @@ app.use('/characters_in_films', require('./charactersInFilms'));
 app.use('/add_character_ship', require('./addCharacterShip'));
 app.use('/add_characters_in_films', require('./addCharacterToFilm'));
 app.use('/specificSearch', require('./characters.js'));
+app.use('/customSearch', require('./customSearch.js'));
+app.use('/customResults', require('./customSearch.js'));
 app.use(express.static(__dirname+'/public'));
 
 app.use(function(req,res){

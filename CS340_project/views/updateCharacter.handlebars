@@ -35,6 +35,12 @@ div {
 }
 </style>
 
+<script>
+    const alertSuccess = () => {
+        alert(`{{character.Name}} has been updated.`);
+    }
+</script>
+
 <h1>Update {{character.Name}}</h1>
 <div>
 <form id="updateCharacter" action="/characters" method="post">
@@ -49,6 +55,6 @@ div {
       {{/each}}
     </select>
 </form>
-<button onclick="updateCharacter({{character.CharacterID}})">Update</button>
+<button onclick="updateCharacter({{character.CharacterID}}); alertSuccess()">Update</button>
 <a href="/characters"><button>Cancel</button></a>
 </div>

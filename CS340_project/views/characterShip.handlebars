@@ -35,11 +35,25 @@ div {
 table{
   text-align: center;
 }
+
+h2 {
+    text-align: center;
+}
  
 </style>
 
-<h1>Characters Pilot Ships</h1>
-<a href="/ships">Back To Ships</a>
+<script>
+    const alertSuccess = () => {
+        alert(`Character has been added to selected ship.`);
+    }
+
+    const deleteSuccess = (ShipID, CharacterID) => {
+        alert(`Character and their ship have been deleted`);
+    }
+</script>
+
+<h1>Add Character To Ship</h1>
+<h2><a href="/ships">Back To Add Ships</a></h2>
 <div>
     <table id="characterShip" class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
         <thead>
@@ -53,12 +67,12 @@ table{
                     <td>{{Name}}</td>
                     <td>{{Ship_Name}}</td>
                     {{!-- <td>{{Model}}</td> --}}
-                    <td><button onclick="deleteCharacterShip({{ShipID}}, {{CharacterID}})">Delete</button></td>
+                    <td><button onclick="deleteCharacterShip({{ShipID}}, {{CharacterID}}); deleteSuccess({{ShipID}}, {{CharacterID}})">Delete</button></td>
                     {{!-- <td><a href="add_character_ship/edit/ship/{{ShipID}}/character/{{CharacterID}}"><button>Update</button></a></td> --}}
                 </tr>
             {{/each}}
         </tbody>
-        <form id="addCharacterShip" action="/add_character_ship" method="POST">
+        <form id="addCharacterShip" action="/add_character_ship" method="POST" onsubmit="alertSuccess()">
             Character: <select name="CharacterID">
                 {{#each characters}}
                     <option value="{{CharacterID}}">{{Name}}</option>
