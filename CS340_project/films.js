@@ -64,7 +64,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             } else{
-                res.redirect('/films');
+                res.redirect('/Films');
             }
         });
     });
