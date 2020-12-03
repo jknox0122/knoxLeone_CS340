@@ -35,14 +35,14 @@ module.exports = function(){
         getFilms(res,mysql,context,complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >=1){
-                res.render('Films',context);
+            if(callbackCount >= 1){
+                res.render('films',context);
             }
         }
     });
 
     router.get('/:FilmID/', function(req,res){
-        callbackCount = 0;
+        var callbackCount = 0;
         var context = {};
         context.jsscripts = ["updateCharacter.js"];
         var mysql = req.app.get('mysql');

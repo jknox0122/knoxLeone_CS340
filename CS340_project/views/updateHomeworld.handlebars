@@ -35,6 +35,12 @@ div {
 }
 </style>
 
+<script>
+    const alertSuccess = () => {
+        alert(`{{homeworld.Name}} has been updated.`);
+    }
+</script>
+
 <h1>Update {{homeworld.Name}}</h1>
 <div>
 <form id="updateHomeworld" action="/homeworlds" method="post">
@@ -43,6 +49,6 @@ div {
     Climate: <input type="text" name="Climate" value="{{homeworld.Climate}}"><br>
     Terrain: <input type="text" name="Terrain" value="{{homeworld.Terrain}}"><br>
 </form>
-<button onclick="updateHomeworld({{homeworld.WorldID}})">Update</button>
+<button onclick="updateHomeworld({{homeworld.WorldID}}); alertSuccess()">Update</button>
 <a href="/homeworlds"><button>Cancel</button></a>
 </div>

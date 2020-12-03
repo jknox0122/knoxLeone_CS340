@@ -34,13 +34,23 @@ div {
 }
 
 table{
-    text-align: center;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
 }
 </style>
 
+<script>
+    const deleteSuccess = (FilmID, CharacterID) => {
+      alert(`Character has been deleted from the film`);
+    }
+</script>
+
 
 <h1>Star Wars Characters in Films {{films.Name_Of_Movie}}</h1>
-<a href="/films">Back To Films</a>
+<h2><a href="/films">Back To Films</a></h2>
 <div>
   <table id="characterFilm" class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
       <thead>
@@ -60,7 +70,7 @@ table{
               <td>{{Species}}</td>
               <td>{{Height}}</td>
               <td>{{homeworld}}</td>
-              <td><button onclick="deleteCharacterFilm({{FilmID}}, {{CharacterID}})">Delete</button></td>
+              <td><button onclick="deleteCharacterFilm({{FilmID}}, {{CharacterID}}); deleteSuccess({{FilmID}}, {{CharacterID}})">Delete</button></td>
           </tr>
           {{/each}}
       </tbody>

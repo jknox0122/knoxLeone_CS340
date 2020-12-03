@@ -29,7 +29,7 @@ module.exports = function(){
         var values = [];
 
         if(params.Name_Of_Movie != ""){
-            conditions.push("Films.Name LIKE ?");
+            conditions.push("Films.Name_Of_Movie LIKE ?");
             values.push("%" + params.Name_Of_Movie + "%");
         }
         if(params.IMDB_Rating != ""){

@@ -28,7 +28,7 @@ module.exports = function(){
     }
 
     const getHomeworlds = (res, mysql, context, complete) => {
-        mysql.pool.query('SELECT WorldID, Name, Population, Climate, Terrain FROM Homeworlds', (err, results, fields) => {
+        mysql.pool.query('SELECT WorldID, Name, Population, Climate, Terrain FROM Homeworlds ORDER BY Name ASC', (err, results, fields) => {
             if(err) {
                 res.write(JSON.stringify(err));
                 res.end();
