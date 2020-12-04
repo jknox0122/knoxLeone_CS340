@@ -15,28 +15,30 @@ module.exports = function(){
         });
     }
 
-    // const getCharacters = (res,mysql,context, complete) => {
-    //     var sql = 'SELECT c.CharacterID, c.Name, c.Birthdate, c.Gender, c.Species, c.Height, h.Name as homeworld from Characters c LEFT JOIN Homeworlds h ON h.WorldID = c.WorldID';
-    //     mysql.pool.query(sql, (error,results,fields) => {
-    //         if(error){
-    //             res.write(JSON.stringify(error));
-    //             res.end();
-    //         }
-    //         context.characters = results;
-    //         complete();
-    //     });
-    // }
+    function getFilm(res,mysql,context, FilmID, complete){
+        var sql = "SELECT FilmID, Name_Of_Movie, Year_Released, IMDB_Rating, Directed_By FROM Films WHERE FilmID = ?";
+        var inserts = [FilmID];
+        mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.film = results[0];
+            complete();
+        });
+    }
 
     router.get('/:FilmID', (req, res) => {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ['deleteCharacterFilm.js']
+        context.jsscripts = ['deleteItems.js']
         var mysql = req.app.get('mysql');
         getCharactersInFilm(res, mysql, context, req.params.FilmID, complete);
+        getFilm(res,mysql,context,req.params.FilmID,complete);
         // getCharacters(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if(callbackCount >= 1) {
+            if(callbackCount >= 2) {
                 res.render('charactersInFilms', context);
             }
         }

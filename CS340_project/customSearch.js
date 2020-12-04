@@ -23,6 +23,35 @@ module.exports = function(){
             }
         }
     });
+
+    function buildQueryHomeworlds(params){
+        var conditions = [];
+        var joins= [];
+        var values = [];
+
+        if(params.Name != ""){
+            conditions.push("Homeworlds.Name LIKE ?");
+            values.push("%" + params.Name + "%");
+        }
+        if(params.Population != ""){
+            conditions.push("Population LIKE ?");
+            values.push("%" + params.Population + "%");
+        }
+        if(params.Climate != ""){
+            conditions.push("Climate LIKE ?");
+            values.push("%" + params.Climate + "%");
+        }
+        if(params.Terrain != ""){
+            conditions.push("Terrain LIKE ?");
+            values.push("%" + params.Terrain + "%");
+        }
+
+        return {
+            WHERE: conditions.length ?
+                conditions.join(' AND ') : '1',
+            values: values
+        };
+    }
     function buildQueryFilms(params){
         var conditions = [];
         var joins = [];
@@ -95,6 +124,81 @@ module.exports = function(){
                     conditions.join(' AND ') : '1',
             values: values
         };
+    }
+
+    function buildQueryShips(params){
+        var conditions = [];
+        var joins = [];
+        var values = [];
+        var conditionsStr;
+
+        if (params.Ship_Name != ""){
+            conditions.push("Piloted_Ships.Name LIKE ?");
+            values.push("%" + params.Ship_Name + "%");
+        }
+        if (params.Crew_Size != ""){
+            conditions.push("Crew_Size = ?")
+            values.push(params.Crew_Size);
+        }
+        if (params.Length != ""){
+            conditions.push("Length LIKE ?");
+            values.push("%" + params.Length + "%");
+        }
+        if(params.Model != ""){
+            conditions.push("Model LIKE ?");
+            values.push(params.Model);
+        }
+        if(params.Flown_By != ""){
+            conditions.push("Characters.Name = ?");
+            values.push(params.Flown_By);
+        }
+
+            return {
+                WHERE: conditions.length ? 
+                        conditions.join(' AND ') : '1',
+                values: values
+            };
+    }
+
+    function getCustomSearchPlanets(res,mysql,context,attributes,complete){
+        var conditions = buildQueryHomeworlds(attributes);
+        var sql;
+            sql = "SELECT Homeworlds.Name, Population, Climate, Terrain FROM Homeworlds";
+            sql += " WHERE " + conditions.WHERE;
+            sql += " GROUP BY Homeworlds.WorldID";
+            console.log(sql);
+            sql = mysql.pool.query(sql,conditions.values,function(error,results,fields){
+                if(error){
+                    res.write(JSON.stringify(error));
+                    res.end();
+                }
+                context.Homeworlds = results;
+                context.selector = "Homeworlds";
+                complete();
+            });
+
+    }
+    function getCustomSearchShips(res,mysql,context,attributes,complete){
+        var conditions = buildQueryShips(attributes);
+        var sql;
+        if(attributes.Flown_By != ""){
+            sql = "SELECT Piloted_Ships.Name, Crew_Size, Length, Model FROM Piloted_Ships";
+            sql += " JOIN Character_Pilot_Ship ON Piloted_Ships.ShipID = Character_Pilot_Ship.ShipID";
+            sql += " JOIN Characters ON Character_Pilot_Ship.CharacterID = Characters.CharacterID";
+            sql += " WHERE " + conditions.WHERE + ";";
+        } else{
+            sql = "SELECT Piloted_Ships.Name, Crew_Size, Length, Model FROM Piloted_Ships";
+            sql += " WHERE " + conditions.WHERE + ";";
+        }
+        console.log(sql);
+        sql = mysql.pool.query(sql,conditions.values,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.Ships = results;
+            complete();
+        });
     }
 
     function getCustomSearchFilms(res,mysql,context,attributes,complete){
@@ -202,7 +306,7 @@ router.post('/', function(req,res){
                     res.render('customResults',{inserts, context, selector: 'Characters'});
                 }
             }
-        } else if(inserts.typeSearchFilms == "Films")
+        } else if(inserts.typeSearchFilms == "Films"){
             getCustomSearchFilms(res, mysql, context, inserts,complete);
             function complete(){
                 callbackCount++;
@@ -210,7 +314,23 @@ router.post('/', function(req,res){
                     res.render('customResults',{inserts, context, selector: 'Films'});
                 }
             }
-        
+        } else if(inserts.typeSearchHomeworlds == "Homeworlds"){
+            getCustomSearchPlanets(res,mysql,context,inserts,complete);
+            function complete(){
+                callbackCount++;
+                if(callbackCount >=1){
+                    res.render('customResults',{inserts,context, selector: 'Homeworlds'});
+                }
+            }
+        } else if(inserts.typeSearchShips == "Ships"){
+            getCustomSearchShips(res,mysql,context,inserts,complete);
+            function complete(){
+                callbackCount++;
+                if(callbackCount >=1){
+                    res.render('customResults',{inserts,context,selector: 'Ships'});
+                }
+            }
+        }
             
     });
 
@@ -268,8 +388,6 @@ router.post('/', function(req,res){
             complete();
         });
     }
-
-    
     return router;
 
 }();

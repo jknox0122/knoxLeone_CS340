@@ -1,0 +1,160 @@
+<script src="/customSearch.js"></script>
+<h1>Custom Search</h1>
+
+    <h3>
+        Search for
+        <select name="typeSearch" id="typeSearch" style="width:20%">
+            <option value="">---select---</option>
+            <option value="Characters">Characters</option>
+            <option value="Films">Films</option>
+            <option value="Homeworlds">Planets</option>
+            <option value="Ships">Ships</option>
+        </select>
+        that Meet the Following Criteria.
+    </h3>
+    <button onclick="myFunction()" style="width: 10%;">ENTER</button>
+
+<div id="CharactersSearch" class="form-style-2" style="width:40%">
+    <div class="form-style-2-heading">Searching Characters</div>
+        <form action="/customResults" method="POST">
+            <input type="hidden" name="typeSearch" value="Characters">
+            <label for="Char_Name"><span>Character Name</span>
+            <input type="text" class="char_name_field" id="Char_Name" name="Char_Name" />
+            </label>
+               
+            <label for="Birthdate"><span>Birth Year</span>
+            <input type="text" class="birth_year_field" name="Birthdate" />
+            </label>
+              
+            <label for="Gender"><span>Gender</span>
+            <select name="Gender" class="Gender_select_field" id="multi-Gender" />
+                <option value="">-- Select --</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            </label>
+              
+            <label for='Species'><span>Species</span>
+            <input type="text" class="Species_field" name="Species" />
+            </label>
+              
+            <label for="Name_Of_Movie"><span>Film Appearance</span>
+            <select class="film_select" name="Name_Of_Movie" id="Name_Of_Movie">
+                <option value="">-- select --</option>
+                {{#each Films}}
+                <option>{{Name_Of_Movie}}</option>
+                {{/each}}
+            </select>
+            </label>
+            <br>
+            <label for="Name"><span>Homeworlds</span>
+            <select class="world_select" name="Name" id="Name">
+                <option value="">-- select --</option>
+                {{#each Homeworlds}}
+                <option>{{Name}}</option>
+                {{/each}}
+            </select>
+            </label>
+            
+            <label for="Piloted_Ships"><span>Ship Piloted</span>
+            <select class="ship_select" name="Piloted_Ships" id='Piloted_Ships'>
+                <option value="">-- select --</option>
+                {{#each Piloted_Ships}}
+                <option>{{Name}}</option>
+                {{/each}}
+            </select>
+            </label>
+
+            <label><span> </span><input type="submit" value="Execute Search"  /></label>
+        </form>
+    </div>
+</div>
+
+<div id="FilmsSearch" class="form-style-2">
+    <div class="form-style-2-heading">Searching Films</div>
+        <form action="/customResults" method="POST">
+            <input type="hidden" name="typeSearchFilms" value="Films">
+            <label for="Name_Of_Movie"><span>Film Name</span>
+            <input type="text" name="Name_Of_Movie">
+            </label>
+
+            <label for="Year_Released"><span>Year Released</span>
+            <input type="text" name="Year_Released">
+            </label>
+
+            <label for="IMDB_Rating"><span>IMDB Rating</span>
+            <input type="text" name="IMDB_Rating">
+            </label>
+
+            <label for="Directed_By"><span>Director</span>
+            <input type="text" name="Directed_By">
+            </label>
+
+            <label for="character_name"><span>Has Character</span>
+            <input type="text" name="character_name">
+            </label>
+
+            <label><span> </span><input type="submit" value="Execute Search"  /></label>
+        </form>
+    </div>
+</div>
+
+<div id="planetSearch" class="form-style-2">
+    <div class="form-style-2-heading">Searching Planets</div>
+        <form action="/customResults" method="POST">
+            <input type="hidden" name="typeSearchHomeworlds" value="Homeworlds">
+            <label for="Name"><span>Planet Name</span>
+            <input type="text" name="Name">
+            </label>
+
+            <label for="Population"><span>Population</span>
+            <input type="text" name="Population">
+            </label>
+
+            <label for="Climate"><span>Climate</span>
+            <input type="text" name="Climate">
+            </label>
+
+            <label for="Terrain"><span>Terrain</span>
+            <input type="text" name="Terrain">
+            </label>
+
+            <label><span> </span><input type="submit" value="Execute Search"  /></label>
+        </form>
+    </div>
+</div>
+
+<div id="shipSearch" class="form-style-2">
+    <div class="form-style-2-heading">Searching Ships</div>
+        <form action="/customResults" method="POST">
+            <input type="hidden" name="typeSearchShips" value="Ships">
+            <label for="Ship_Name"><span>Ship Name</span>
+            <input type="text" name="Ship_Name">
+            </label>
+
+            <label for="Crew_Size"><span>Crew Size</span>
+            <input type="text" name="Crew_Size">
+            </label>
+
+            <label for="Length"><span>Length</span>
+            <input type="text" name="Length">
+            </label>
+
+            <label for="Model"><span>Model</span>
+            <input type="text" name="Model">
+            </label>
+
+            <label for="Flown_By"><span>Flown by Character</span>
+            <select class="char_select" name="Flown_By" id="Flown_By">
+                <option value="">-- select --</option>
+                {{#each Characters}}
+                <option>{{Name}}</option>
+                {{/each}}
+            </select>
+            </label>
+
+            <label><span> </span><input type="submit" value="Execute Search"  /></label>
+        </form>
+    </div>
+</div>
+                  

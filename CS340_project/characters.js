@@ -41,36 +41,29 @@ module.exports = function(){
     router.get('/', function(req,res){
         var callbackCount = 0;
         var context ={};
-        context.jsscripts = ["deleteCharacter.js"];
+        context.jsscripts = ["deleteItems.js"];
         var mysql = req.app.get('mysql');
         getCharacters(res,mysql,context,complete);
         getHomeworlds(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
-                res.render('characters',context);
+                res.render('characters', context);
             }
         }
     });
 
-    router.get('/specificSearch', function(req,res){
-        var context = {};
-        context.jsscripts = ["specificSearch.js"];
-        res.render('specificSearch',context);
-    })
-
-
     router.get('/:CharacterID', function(req,res){
         callbackCount = 0;
-        var context = {};
-        context.jsscripts = ["updateCharacter.js"];
+        var context = {}
+        context.jsscripts = ["updateItems.js"];
         var mysql = req.app.get('mysql');
         getCharacter(res,mysql,context,req.params.CharacterID,complete);
         getHomeworlds(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
-                res.render('updateCharacter',context);
+                res.render('updateCharacter.hbs', context);
             }
         }
     });

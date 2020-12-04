@@ -1,48 +1,140 @@
-.btn {
-    background-color: DodgerBlue; /* Blue background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    padding: 12px 16px; /* Some padding */
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
   }
-
-  /* Darker background on mouse-over */
-.btn:hover {
-    background-color: RoyalBlue;
+  
+  h1{
+      text-align: center;
   }
-body{
-    padding: 14px;
+  button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  table{
     text-align: center;
-}
-table{
-   width: 80%;
-   margin: 20px auto;
-   table-layout: auto; 
-   border: 1px solid black;
+  }
+  h2{
+    text-align: center;
+  }
+
+body {
+    padding: 5px 5px;
+    font-size: 18px;
+    font-family:'Star Jedi', arial;
 }
 
-.fixed{
-    table-layout: fixed;
+.navbar {
+  overflow: hidden;
+  background-color: #333;
 }
 
-table,
-td,
-th {
-    border-collapse: collapse;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-tr:hover{
-    background-color: #f5f5f5;
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
-th{
-    font-size: x-large;
-    background-color: chocolate;
+.dropdown {
+  float: left;
+  overflow: hidden;
 }
 
-tr:nth-child(even){
-    background-color: #f2f2f2;
+.dropdown .dropbtn {
+  font-size: 24px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#CharactersSearch {
+        display: none;
+    }
+    #FilmsSearch {
+        display: none;
+    }
+    #planetSearch{
+        display: none;
+    }
+    #shipSearch{
+        display: none;
+    }
+
+p{
+  text-align: center;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

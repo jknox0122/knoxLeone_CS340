@@ -23,19 +23,7 @@ module.exports = function() {
             complete();
         });
     }
-
-    // const getCharactersInFilm = (res, mysql, context, complete) => {
-    //     var sql = 'SELECT cf.FilmID, cf.CharacterID, c.Name, f.Name_Of_Movie FROM Characters c INNER JOIN Characters_In_Films cf ON c.CharacterID = cf.CharacterID INNER JOIN Films f ON f.FilmID = cf.FilmID';
-    //     mysql.pool.query(sql, (error, results, fields) => {
-    //         if(error) {
-    //             res.write(JSON.stringify(error));
-    //             res.end();
-    //         }
-    //         context.characterFilms = results;
-    //         complete();
-    //     });
-    // }
-
+    
     router.get('/', (req, res) => {
         var callbackCount = 0;
         var context = {};
@@ -61,7 +49,7 @@ module.exports = function() {
                 res.end();
             } else{
                 console.log(req.body);
-                res.redirect('/add_characters_in_films');
+                res.redirect('/characters_in_films/'+inserts[0]);
             }
         });
     });

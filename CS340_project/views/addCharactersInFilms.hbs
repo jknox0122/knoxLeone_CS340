@@ -1,0 +1,26 @@
+<script>
+    const alertSuccess = () => {
+        alert('Character has been added to the selected film');
+    }
+</script>
+
+<div>
+    <h1>Add Character To Film</h1>
+    <form id="addCharacterInFilm" action="/add_characters_in_films" method="POST" onsubmit="alertSuccess()">
+        Characters: <select name="CharacterID" style="width:40%"> 
+            {{#each characters}}
+                <option value="{{CharacterID}}">{{Name}}</option>
+            {{/each}}
+        </select>
+        <br>
+        Films: <select name="FilmID" style="width:40%" id='filmSelect'>
+            {{#each films}}
+                <option value="{{FilmID}}">{{Name_Of_Movie}}</option>
+            {{/each}}
+        </select>
+        <br>
+        <input type="submit" value="Submit" onclick="backToFilms()">
+    </form>
+
+
+</div>

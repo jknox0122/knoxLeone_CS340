@@ -1,46 +1,3 @@
-<style>
-    input[type=text], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-h1{
-    text-align: center;
-}
-button {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-
-table{
-  text-align: center;
-}
-
-h2 {
-  text-align: center;
-}
-</style>
 
 <script>
     const deleteSuccess = (FilmID, CharacterID) => {
@@ -49,8 +6,7 @@ h2 {
 </script>
 
 
-<h1>Star Wars Characters in Films {{films.Name_Of_Movie}}</h1>
-<h2><a href="/films">Back To Films</a></h2>
+<h1>Star Wars Characters in "{{film.Name_Of_Movie}}"</h1>
 <div>
   <table id="characterFilm" class="table table-striped" style="width: 60rem; margin:auto; margin-top: 2rem; margin-bottom: 2rem;">
       <thead>
@@ -75,6 +31,9 @@ h2 {
           {{/each}}
       </tbody>
   </table>
-  <h2>Dont See A Character?</h2>
-  <a href="/add_characters_in_films">Add Character To Film</a>
+
+    <p>
+      Don't See a Character? <a href="/add_characters_in_films">Add Character To Film</a>
+    </p>
+    
 </div>

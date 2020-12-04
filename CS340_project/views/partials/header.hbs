@@ -1,0 +1,32 @@
+<script>
+    function shipPage(){
+        window.location.replace("/ships");
+    }
+
+    function filmPage(){
+        window.location.replace("/films");
+    }
+</script>
+
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/characters">Characters</a>
+    <div class="dropdown">
+        <button class="dropbtn" onclick="filmPage();">Films
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/add_characters_in_films">Add Character to Film</a>
+        </div>
+    </div>
+    <a href="/homeworlds">Homeworlds</a>
+    <div class="dropdown">
+        <button class="dropbtn" onclick="shipPage();">Ships
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="/add_character_ship">Character-Ship Relations</a>
+        </div>
+    </div>
+    <a href="/customSearch">Custom Search</a>
+</div>

@@ -2,18 +2,32 @@
     window.onload = function(){
         var cr = document.getElementById("Character_Results");
         var fr = document.getElementById("Films_Results");
+        var hr = document.getElementById("Homeworlds_Results");
+        var sr = document.getElementById("Ship_Results");
         var selector = document.getElementById("Selector").value;
         if(selector == "Films"){
             cr.style.display = "none";
+            hr.style.display = "none";
+            sr.style.display = "none";
         }
         if(selector == "Characters"){
             fr.style.display = "none";
+            hr.style.display = "none";
+            sr.style.display = "none";
+        }
+        if(selector == "Homeworlds"){
+            fr.style.display = "none";
+            cr.style.display = "none";
+            sr.style.display = "none";
+        }
+        if(selector == "Ships"){
+            fr.style.display = "none";
+            cr.style.display = "none";
+            hr.style.display = "none";
         }
     }
 </script>
 <input type="hidden" value="{{selector}}" id="Selector">
-
-<h2><a href="/">Home Page</a></h2>
 <h1>These are your custom results</h1>
 <div id= "Character_Results" name="Character_Results">
 <label for="characterTable">Character Results From filter: [Name: {{inserts.Char_Name}}] [Birth: {{inserts.Birthdate}}] [Gender: {{inserts.Gender}}] [Species: {{inserts.Species}}] [Film Appearance: {{inserts.Name_Of_Movie}}] [Homeworld: {{inserts.Name}}] [Piloted Ship: {{inserts.Piloted_Ships}}]</label>
@@ -56,6 +70,48 @@
                 <td>{{Year_Released}}</td>
                 <td>{{IMDB_Rating}}</td>
                 <td>{{Directed_By}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+
+<div id= "Homeworlds_Results" name="Homeworlds_Results">
+<table>
+    <thead>
+        <th>Homeworld Name</th>
+        <th>Population</th>
+        <th>Climate</th>
+        <th>Terrain</th>
+    </thead>
+    <tbody>
+        {{#each context.Homeworlds}}
+            <tr>
+                <td>{{Name}}</td>
+                <td>{{Population}}</td>
+                <td>{{Climate}}</td>
+                <td>{{Terrain}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+
+<div id= "Ships_Results" name="Ships_Results">
+<table>
+    <thead>
+        <th>Ship Name</th>
+        <th>Crew Size</th>
+        <th>Length</th>
+        <th>Model</th>
+    </thead>
+    <tbody>
+        {{#each context.Ships}}
+            <tr>
+                <td>{{Name}}</td>
+                <td>{{Crew_Size}}</td>
+                <td>{{Length}}</td>
+                <td>{{Model}}</td>
             </tr>
         {{/each}}
     </tbody>

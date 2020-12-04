@@ -1,18 +1,25 @@
-var express = require('express');
+const express = require('express');
 var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
+const path= require('path');
 
-var app = express();
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+const app = express();
+var hbs = require('express-handlebars');
 
-app.engine('handlebars', handlebars.engine);
+app.engine('hbs', hbs( {
+  extname: 'hbs',
+  defaultLayout: 'main',
+  layoutsDir: __dirname + '/views/layouts/',
+  partialsDir: __dirname + '/views/partials'
+}));
+
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(path.join(__dirname, 'public')))
 app.use('/static',express.static('public'));
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 app.set('port', 3199);
 app.set('mysql', mysql);
 
-//res.render('view', { title: 'my other page', layout: 'other' });
 app.get('/', (req, res) => res.render("index"));
 app.use('/characters', require('./characters.js'));
 app.use('/films', require('./films.js'));
@@ -21,7 +28,6 @@ app.use('/ships', require('./ships'));
 app.use('/characters_in_films', require('./charactersInFilms'));
 app.use('/add_character_ship', require('./addCharacterShip'));
 app.use('/add_characters_in_films', require('./addCharacterToFilm'));
-app.use('/specificSearch', require('./characters.js'));
 app.use('/customSearch', require('./customSearch.js'));
 app.use('/customResults', require('./customSearch.js'));
 app.use(express.static(__dirname+'/public'));

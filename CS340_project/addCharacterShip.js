@@ -78,7 +78,7 @@ module.exports = function() {
     router.get('/', (req, res) => {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ['deleteCharacterShip.js'];
+        context.jsscripts = ['deleteItems.js'];
         var mysql = req.app.get('mysql');
         getShips(res, mysql, context, complete);
         getCharacters(res, mysql, context, complete);

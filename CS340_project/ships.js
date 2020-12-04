@@ -29,7 +29,7 @@ module.exports = function() {
     router.get('/', (req, res) => {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ['deleteShip.js'];
+        context.jsscripts = ['deleteItems.js'];
         var mysql = req.app.get('mysql');
         getShips(res, mysql, context, complete);
         function complete() {
@@ -43,7 +43,7 @@ module.exports = function() {
     router.get('/:ShipID', (req, res) => {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ['updateShip.js'];
+        context.jsscripts = ['updateItems.js'];
         var mysql = req.app.get('mysql');
         getShip(res, mysql, context, req.params.ShipID, complete);
         function complete() {
